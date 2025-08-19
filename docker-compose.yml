@@ -1,19 +1,16 @@
 services:
-  next_bdd:
-    container_name: next_bdd
-    image: mariadb:latest
-    volumes:
-      - ./mysql:/var/lib/mysql
-    ports:
-      - 3306:3306
+  db:
+    image: postgres:15
+    container_name: yneo-db
+    restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: boby
-      MARIADB_DATABASE: bddname
-      MARIADB_USER: superman
-      MARIA_PASSWORD: mansuper
-
-  next_adminer:
-    container_name: next_adminer
-    image: adminer
+      POSTGRES_USER: yneo
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: yneoapp
     ports:
-      - 8080:8080
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
