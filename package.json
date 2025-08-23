@@ -9,7 +9,9 @@
     "dev:docker": "cp .env.local .env && npx prisma migrate dev && npm run dev",
     "dev:neon": "cp .env.production .env && npx prisma migrate deploy && npm run dev",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "studio:local": "node studio.js local",
+    "studio:neon": "node studio.js neon"
   },
   "dependencies": {
     "@prisma/client": "^6.14.0",

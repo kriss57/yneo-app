@@ -22,6 +22,8 @@ async function main() {
     // Récupération des users
     const allUsers = await prisma.user.findMany()
     console.log('Tous les utilisateurs:', allUsers)
+
+    console.log("Connecting to DB:", process.env.DATABASE_URL)
 }
 
 main()
