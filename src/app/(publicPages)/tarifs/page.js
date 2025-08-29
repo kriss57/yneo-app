@@ -1,7 +1,10 @@
+import InProgress from "@/components/publicComponents/InProgress"
+
 export default function Tarifs() {
     return (
         <div>
             <h1>Page Tarifs</h1>
+            <InProgress />
         </div>
     )
 }
