@@ -11,7 +11,10 @@
     "start": "next start",
     "lint": "next lint",
     "studio:local": "node studio.js local",
-    "studio:neon": "node studio.js neon"
+    "studio:neon": "node studio.js neon",
+    "export": "next build && next export", 
+    "deploy": "gh-pages -d out",
+    "predeploy": "npm run export"
   },
   "dependencies": {
     "@prisma/client": "^6.14.0",
@@ -38,5 +41,5 @@
   "bugs": {
     "url": "https://github.com/kriss57/yneo-app/issues"
   },
-  "homepage": "https://github.com/kriss57/yneo-app#readme"
+  "homepage": "https://github.com/kriss57/yneo-app"
 }
