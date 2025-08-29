@@ -1,7 +1,8 @@
 import Link from "next/link"
 import Image from "next/image"
 
-export default () => {
+
+const Header = () => {
     return (
         <header>
 
@@ -23,3 +24,4 @@ export default () => {
         </header>
     )
 }
+export default Header

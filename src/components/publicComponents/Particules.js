@@ -2,7 +2,7 @@
 "use client"
 import { useEffect, useRef } from "react"
 
-export default function Particles() {
+const Particules = () => {
     const canvasRef = useRef(null)
 
     useEffect(() => {
@@ -137,3 +137,4 @@ export default function Particles() {
 }
 
 
+export default Particules

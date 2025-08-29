@@ -2,7 +2,8 @@ import Image from "next/image"
 
 import styles from "@/app/page.module.css"
 
-export default () => {
+
+const Footer = () => {
     return (
         <footer>
             <a
@@ -50,3 +51,4 @@ export default () => {
         </footer>
     )
 }
+export default Footer
