@@ -12,17 +12,68 @@
 
 html,
 body {
+  height: 100%;
   max-width: 100vw;
   overflow-x: hidden;
+  
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+
+  /*ajout en cours de test */
+  /* height: 100vh; 
+  background: linear-gradient(to bottom, rgb(40, 2, 71), black); 
+  font-family: Arial, Helvetica, sans-serif;*/
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+
+  /* Ajoute position: relative au body pour son pseudo-élément */
+  position: relative; 
+
+/* Donne un z-index explicite au halo (sous le hero qui est à z-index:1) */
+
+  /*test______des colonnes_____________________*/
+  margin: 0;
+  height: 100vh;
+
+  background-position: 25% 0; /* décalage horizontal */
+
+  background-size: 15% 100%;  /* répète le motif exactement 4 fois */
+  background-repeat: repeat-x; 
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.01) 0,      /* début clair */
+      rgba(255,255,255,0.01) 20%,    /* largeur de la colonne */
+      transparent 15%,
+      transparent 40%                /* espace avant la suivante */
+    ),
+    black;
+  /*-----------------------------------*/
 }
+
+
+/*-------EHalo violet au niveau de la navbar-----*/
+body::before {
+  z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;          /* couvre toute la largeur */
+  height: 250px;        /* descend plus bas */
+  background: radial-gradient(
+    ellipse at top,                    /* forme arrondie en bas */
+    rgba(35, 3, 64, 0.8) 0%,        /* violet bien visible */
+    rgba(0, 0, 0, 0.95) 70%            /* transition douce vers noir */
+  );
+  pointer-events: none;
+}
+  /*--------------------------------------------------------*/
+
 
 * {
   box-sizing: border-box;
@@ -39,4 +90,105 @@ a {
   html {
     color-scheme: dark;
   }
+}
+header {
+  width: 100%;
+  display: flex;
+  margin: 20px;
+} 
+
+nav{
+  display: flex;
+  width: 100%;
+  position: relative; /* important pour que z-index marche */
+  z-index: 10;        /* passe au-dessus du halo */
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-right: 20px;
+  margin-right: 500px
+}
+
+li{
+  list-style-type: none;
+}
+
+.name{
+ 
+  color: #D451E0;
+  margin-right: 400px;
+}
+
+.bob{
+  margin: 20px;
+}
+
+.main-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 400px;
+}
+.main-title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+}
+/*Pour cacher la bar du lecteur video au depart*/
+media-control-bar {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+media-controller:hover media-control-bar {
+  opacity: 1;
+}
+
+h1{
+  font-size: 40px;
+  margin-bottom: 35px;
+  z-index: 2;
+  margin: 10px;
+}
+.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  width: 200px;  
+  text-align: center;
+  margin: 20px;
+  text-align: center;
+  padding: auto;
+}
+#btnInfo{
+  height: 30px;
+  position: relative; /* important pour que z-index marche */
+  z-index: 10;        /* passe au-dessus du halo */
+}
+#btnForm{
+  height: 40px;
+  background-color:#D451E0;
+  color: black;
+  font-weight: bold;
+  margin: 50px;
+  border: none;
+}
+footer{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+footer a{
+  margin: 35px;
 }
