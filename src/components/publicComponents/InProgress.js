@@ -1,4 +1,6 @@
 // src/components/publicComponents/InProgress.js
+"use client"
+
 import React, { useEffect, useState } from "react"
 
 const InProgress = () => {
