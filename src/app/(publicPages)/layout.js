@@ -6,7 +6,6 @@ export default function Layout({ children }) {
         <>
             <Header />
             <main>
-                <p>Public Layout</p>
                 {children}
             </main>
             <Footer />
