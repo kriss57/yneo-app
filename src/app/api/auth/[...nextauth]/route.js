@@ -1,6 +1,5 @@
-// src/app/api/auth/[...nextauth]/route.js
 import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials" // import statique
+import CredentialsProvider from "next-auth/providers/credentials" // <- import statique
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "@/lib/prisma"
 import bcrypt from "bcrypt"
@@ -22,7 +21,6 @@ export const authOptions = {
                 if (user && await bcrypt.compare(credentials.password, user.password)) {
                     return { id: user.id, name: user.name, email: user.email }
                 }
-
                 return null
             },
         }),
