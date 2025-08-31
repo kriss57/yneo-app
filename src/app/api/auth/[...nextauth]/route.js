@@ -1,22 +1,12 @@
 // src/app/api/auth/[...nextauth]/route.js
-import NextAuth from "next-auth/next"
+import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import prisma from "@/lib/prisma"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import prisma from "@/lib/prisma.js"
+import bcrypt from "bcrypt"
 
-// Fonction pour vérifier l'utilisateur avec Prisma
-async function authorizeUser(credentials) {
-    const user = await prisma.user.findUnique({
-        where: { email: credentials.email },
-    })
-
-    if (user && user.password === credentials.password) {
-        // Pour plus de sécurité, tu peux hasher le mot de passe avant la comparaison
-        return { id: user.id, email: user.email, name: user.name }
-    }
-    return null
-}
-
-const handler = NextAuth({
+export const authOptions = {
+    adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -25,17 +15,25 @@ const handler = NextAuth({
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                return await authorizeUser(credentials)
+                const user = await prisma.user.findUnique({
+                    where: { email: credentials.email },
+                })
+
+                if (user && await bcrypt.compare(credentials.password, user.password)) {
+                    return { id: user.id, name: user.name, email: user.email }
+                }
+                return null
             },
         }),
     ],
     session: {
-        strategy: "jwt", // JWT côté client
+        strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
-        signIn: "/login", // Page de connexion personnalisée
+        signIn: "/login",
     },
-})
+}
 
+const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }
