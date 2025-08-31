@@ -1,8 +1,8 @@
 // src/app/api/auth/[...nextauth]/route.js
 import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
+import CredentialsProvider from "next-auth/providers/credentials" // import statique
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import prisma from "@/lib/prisma.js"
+import prisma from "@/lib/prisma"
 import bcrypt from "bcrypt"
 
 export const authOptions = {
@@ -22,18 +22,16 @@ export const authOptions = {
                 if (user && await bcrypt.compare(credentials.password, user.password)) {
                     return { id: user.id, name: user.name, email: user.email }
                 }
+
                 return null
             },
         }),
     ],
-    session: {
-        strategy: "jwt",
-    },
+    session: { strategy: "jwt" },
     secret: process.env.NEXTAUTH_SECRET,
-    pages: {
-        signIn: "/login",
-    },
+    pages: { signIn: "/login" },
 }
 
 const handler = NextAuth(authOptions)
+
 export { handler as GET, handler as POST }
