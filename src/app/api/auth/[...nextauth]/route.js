@@ -1,10 +1,9 @@
-// src/app/api/auth/[...nextauth]/route.js
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import prisma from "@/lib/prisma"
 import bcrypt from "bcryptjs"
 
-const authOptions = {
+export const authOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -15,28 +14,26 @@ const authOptions = {
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) return null
 
-                // Cherche l'utilisateur par email
                 const user = await prisma.user.findUnique({
                     where: { email: credentials.email },
                 })
 
-                // Vérifie le mot de passe
-                if (user && bcrypt.compareSync(credentials.password, user.password)) {
-                    return { id: user.id, email: user.email }
-                }
+                if (!user) return null
 
-                return null
+                const isValid = await bcrypt.compare(credentials.password, user.password)
+                if (!isValid) return null
+
+                return { id: user.id, email: user.email }
             },
         }),
     ],
-    session: { strategy: "jwt" }, // JWT pour App Router
+    session: { strategy: "jwt" },
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
-        signIn: "/login", // Redirige vers /login si non connecté
+        signIn: "/login",
     },
 }
 
+// ATTENTION : export avec GET et POST pour App Router
 const handler = NextAuth(authOptions)
-
-// Export pour App Router : GET et POST
 export { handler as GET, handler as POST }
