@@ -16,13 +16,6 @@ datasource db {
 }
 
 
-//model User {
-//  id    Int     @id @default(autoincrement())
-//  email String  @unique
-//  name  String?
-//  createdAt DateTime @default(now())
-//}
-
 model User {
   id        String   @id @default(cuid())
   name      String?
