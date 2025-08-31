@@ -1,15 +1,7 @@
-// lib/prisma.js 
-// -----------------------------------------------------
-// ------------ création du client prisma -------------
 import { PrismaClient } from "@prisma/client"
 import dotenv from "dotenv"
 
-// Choisir l'env selon un paramètre NODE_ENV_BASE
-if (process.env.NODE_ENV_BASE === "neon") {
-    dotenv.config({ path: ".env.neon" })
-} else {
-    dotenv.config({ path: ".env.local" })
-}
+dotenv.config() // charge .env, .env.local, .env.production automatiquement selon NODE_ENV
 
 let prisma
 
