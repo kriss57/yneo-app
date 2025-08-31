@@ -9,7 +9,7 @@ export default function DashboardPage() {
         return (
             <div className="center-container">
                 <div className="form-box">
-                    <h1>Vous n'êtes pas connecté</h1>
+                    <h1><p>Vous n{"'"}êtes pas connecté</p></h1>
                 </div>
             </div>
         )
