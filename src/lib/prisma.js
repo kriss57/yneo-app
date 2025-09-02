@@ -1,17 +1,11 @@
 import { PrismaClient } from "@prisma/client"
-import dotenv from "dotenv"
 
-dotenv.config() // charge .env, .env.local, .env.production automatiquement selon NODE_ENV
+const globalForPrisma = globalThis
 
-let prisma
+const prisma = globalForPrisma.prisma || new PrismaClient()
 
-if (process.env.NODE_ENV === "production") {
-    prisma = new PrismaClient()
-} else {
-    if (!global.prisma) {
-        global.prisma = new PrismaClient()
-    }
-    prisma = global.prisma
+if (process.env.NODE_ENV !== "production") {
+    globalForPrisma.prisma = prisma
 }
 
 export default prisma
