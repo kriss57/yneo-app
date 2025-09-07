@@ -50,6 +50,7 @@ model Product {
   price       Float
   imageUrl    String? // Image principale
   images      Image[] // Relation inverse vers Image
+  createdAt   DateTime @default(now())  // 👈 ajout
 }
 
 model Image {
