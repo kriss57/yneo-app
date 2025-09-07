@@ -82,6 +82,7 @@ body::before {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: var(--font-space-grotesk);
 }
 
 a {
@@ -100,6 +101,7 @@ header {
   margin: 20px;
   border: 1px solid rgb(108, 104, 104);
   margin-bottom: 60px; /* pour sortir du halo */
+  font-family: var(--font-space-grotesk);
 } 
 
 nav{
@@ -107,6 +109,7 @@ nav{
   width: 100%;
   position: relative; /* important pour que z-index marche */
   z-index: 10;        /* passe au-dessus du halo */
+  
 }
 
 ul {
@@ -134,8 +137,15 @@ li{
   margin: 20px;
 }
 
-.main-container{
+main{
+  font-family: var(--font-space-grotesk);
+  display: flex;
+  justify-content: center;
+  width: 100%;
   border: 1px solid rgb(108, 104, 104);
+}
+.main-container{
+
   width: 100%;
   display: flex;
   margin-top: 20px;
@@ -150,6 +160,12 @@ li{
   align-items: center;
   margin: auto;
   text-align: center;
+  
+}
+.video-container{
+  width: 85%;
+  height: 200px;
+  border-radius: 25px;
 }
 /*Pour cacher la bar du lecteur video au depart*/
 media-control-bar {
@@ -162,10 +178,11 @@ media-controller:hover media-control-bar {
 }
 
 h1{
-  font-size: 40px;
+  font-size: 60px;
   margin-bottom: 35px;
   z-index: 2;
   margin: 10px;
+  font-family: var(--font-space-grotesk);
 }
 .btn{
   display: flex;
@@ -186,6 +203,7 @@ h1{
   box-shadow: 0 4px 30px rgba(88, 88, 88, 0.002);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 #btnForm{
   height: 40px;
@@ -263,4 +281,53 @@ footer a{
   margin-top: 1rem;
   text-align: center;
   color: #333;
+}
+
+/*Page upload*/
+.upload-container {
+  margin-top: 100px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 200px;
+  margin-bottom: 250px;
+}
+
+/*page add product admin*/
+.add-product-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 210px;
+  z-index: 2;
+  position: relative; 
+}
+.add-product-form{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding-top: 20px;
+  width: 300px;
+  height: 250px;
+  padding-top: 40px;
+  justify-content: space-around;
+  
+}
+
+/*Page boutique public*/
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  gap: 20px;
+}
+#card{
+  margin-bottom: 30px;
 }

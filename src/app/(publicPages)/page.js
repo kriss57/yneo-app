@@ -3,6 +3,7 @@
 import Image from "next/image"
 import styles from "@/app/page.module.css"
 import ReactPlayer from "react-player"
+
 import {
     MediaController,
     MediaControlBar,
@@ -34,43 +35,45 @@ export default function Acceuil() {
                             width={32}
                             height={32}
                         /> Nouvelle IA Avancée</button>
-                    <h1><Image
-                        src="/ico/sphere.webp"
-                        alt="Icône"
-                        width={32}
-                        height={32}
-                    /> L’outil tout-en-un pour les créateurs</h1>
+                    <h1>L’outil tout-en-un pour <br /> les créateurs</h1>
 
                     <p>Transforme tes idées en contenu engageant en quelques minutes.</p>
                     <button className="btn" id="btnForm">Commencer gratuitement</button>
-
-                    <MediaController
-                        style={{
-                            width: "100%",
-                            aspectRatio: "16/9",
-                        }}
-                    >
-                        <ReactPlayer
-                            slot="media"
-                            src='https://www.youtube.com/shorts/AD62VSb-gqs'
-                            controls={false}
+                    <div className="video-container">
+                        <MediaController
                             style={{
                                 width: "100%",
-                                height: "100%",
-                                "--controls": "none",
-                            }} />
-                        <MediaControlBar autohide>
-                            <MediaPlayButton />
-                            <MediaSeekBackwardButton seekOffset={10} />
-                            <MediaSeekForwardButton seekOffset={10} />
-                            <MediaTimeRange />
-                            <MediaTimeDisplay showDuration />
-                            <MediaMuteButton />
-                            <MediaVolumeRange />
-                            <MediaPlaybackRateButton />
-                            <MediaFullscreenButton />
-                        </MediaControlBar>
-                    </MediaController>
+                                aspectRatio: "16/9",
+                            }}
+                        >
+                            <ReactPlayer
+                                slot="media"
+                                src='https://9fffavybphimvcsn.public.blob.vercel-storage.com/Cercle%20Violet.mp4'
+                                controls={false}
+                                loop={true}         // 🔁 répétition infinie
+                                playing={true}      // ▶️ auto-play si tu veux
+                                muted={true}        // 🔇 nécessaire pour autoplay sans bloquer le navigateur
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: "20px",   // arrondi
+                                    overflow: "hidden",     // masque le débordement
+                                    "--controls": "none",
+                                }} />
+                            <MediaControlBar autohide>
+                                <MediaPlayButton />
+                                <MediaSeekBackwardButton seekOffset={10} />
+                                <MediaSeekForwardButton seekOffset={10} />
+                                <MediaTimeRange />
+                                <MediaTimeDisplay showDuration />
+                                <MediaMuteButton />
+                                <MediaVolumeRange />
+                                <MediaPlaybackRateButton />
+                                <MediaFullscreenButton />
+                            </MediaControlBar>
+                        </MediaController>
+                    </div>
+
                 </div>
 
             </div>

@@ -14,7 +14,7 @@ const Header = () => {
                             alt="Icône"
                             width={10}
                             height={10}
-                        />  Name/acceuil</Link></li>
+                        />  Néo-Prod</Link></li>
                     <li className="bob"><Link href="/fonctions">Fonctions</Link></li>
                     <li className="bob"><Link href="/boutiques" >Boutiques</Link></li>
                     <li className="bob"><Link href="/tarifs" >Tarifs</Link></li>

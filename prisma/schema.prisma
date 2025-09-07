@@ -9,21 +9,20 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
   // uncomment next line if you use Prisma <5.10
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
-
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  password  String   // hashé avec bcrypt
-  role      Role     @default(USER) // rôle: USER / ADMIN
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String        @id @default(cuid())
+  name         String?
+  email        String        @unique
+  password     String // hashé avec bcrypt
+  role         Role          @default(USER) // rôle: USER / ADMIN
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   subscription Subscription? // lien vers abonnement
 }
 
@@ -31,11 +30,35 @@ model Subscription {
   id        String   @id @default(cuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @unique
-  plan      String   // ex: "FREE", "PRO"
-  status    String   // ex: "ACTIVE", "CANCELED"
+  plan      String // ex: "FREE", "PRO"
+  status    String // ex: "ACTIVE", "CANCELED"
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Video {
+  id        Int      @id @default(autoincrement())
+  title     String
+  url       String
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+  price       Float
+  imageUrl    String? // Image principale
+  images      Image[] // Relation inverse vers Image
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  url       String
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int?     // ← optionnel
+}
+
 
 enum Role {
   USER

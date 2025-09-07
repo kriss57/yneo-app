@@ -30,12 +30,13 @@ const InProgress = () => {
                 borderRadius: "8px",
                 margin: "20px 0",
                 overflow: "hidden",
+                marginTop: "40px",
             }}
         >
             <span style={{ marginBottom: "10px" }}>Page en cours…</span>
             <div
                 style={{
-                    width: "80%",
+                    width: "100%",
                     height: "10px",
                     backgroundColor: "#333",
                     borderRadius: "5px",
