@@ -1,19 +1,12 @@
-// app/layout.js
-import { Roboto, Fira_Code } from "next/font/google"
-import "./globals.css"
+import { Inter, Space_Grotesk } from "next/font/google"
 import { SessionProvider } from "next-auth/react"
 import { auth } from "@/lib/auth"
-import { Inter, Space_Grotesk } from "next/font/google"
+import ChakraProviderWrapper from "@/app/chakraProvider"
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-})
+import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-})
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] })
+const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"] })
 
 export const metadata = {
   title: "Create Next App",
@@ -21,13 +14,16 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const session = await auth() // récupère la session côté serveur
+  const session = await auth()
 
   return (
     <html lang="fr">
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+        <div className="scanline-effect" />
         <SessionProvider session={session}>
-          {children}
+          <ChakraProviderWrapper>
+            {children}
+          </ChakraProviderWrapper>
         </SessionProvider>
       </body>
     </html>

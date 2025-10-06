@@ -1,83 +1,8 @@
+/* globals.css - fusionné et commenté */
 
-
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  height: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-  
-}
-
-body {
-  color: var(--foreground);
-  margin: 0;
-
-  /*ajout en cours de test */
-  /* height: 100vh; 
-  background: linear-gradient(to bottom, rgb(40, 2, 71), black); 
-  font-family: Arial, Helvetica, sans-serif;*/
-  /* -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
-
-  /* Ajoute position: relative au body pour son pseudo-élément */
-  position: relative; 
-
-/* Donne un z-index explicite au halo (sous le hero qui est à z-index:1) */
-
-  /*test______des colonnes_____________________*/
-  margin: 0;
-  height: 100vh;
-
-  background-position: 25% 0; /* décalage horizontal */
-
-  background-size: 15% 100%;  /* répète le motif exactement 4 fois */
-  background-repeat: repeat-x; 
-  background:
-    repeating-linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.01) 0,      /* début clair */
-      rgba(255,255,255,0.01) 20%,    /* largeur de la colonne */
-      transparent 15%,
-      transparent 40%                /* espace avant la suivante */
-    ),
-    black;
-  /*-----------------------------------*/
-}
-
-
-/*-------EHalo violet au niveau de la navbar-----*/
-body::before {
-  z-index: 0;
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;          /* couvre toute la largeur */
-  height: 250px;        /* descend plus bas */
-  background: radial-gradient(
-    ellipse at top,                    /* forme arrondie en bas */
-    rgba(35, 3, 64, 0.8) 0%,        /* violet bien visible */
-    rgba(0, 0, 0, 0.95) 70%            /* transition douce vers noir */
-  );
-  pointer-events: none;
-}
-  /*--------------------------------------------------------*/
-
-
+/*---------------------------------------------
+  Réinitialisation des marges et paddings + font globale
+---------------------------------------------*/
 * {
   box-sizing: border-box;
   padding: 0;
@@ -85,31 +10,96 @@ body::before {
   font-family: var(--font-space-grotesk);
 }
 
+/*---------------------------------------------
+  Mise en place de la taille du html/body
+---------------------------------------------*/
+html, body {
+  height: 100%;
+  max-width: 100vw;
+  overflow-x: hidden; /* empêche le scroll horizontal */
+}
+/*style retro scayline*/
+:root {
+  --retro-cyan: #00ffff;
+  --retro-magenta: #ff00ff;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scanline-effect::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 425px;
+  background: linear-gradient(transparent, var(--retro-magenta), transparent);
+  opacity: 0.2;
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+}
+/*---------------------------------------------
+  Styles principaux du body
+---------------------------------------------*/
+body {
+  margin: 0;
+  position: relative; /* nécessaire pour le halo violet avec ::before */
+  height: 100vh;
+
+  background: var(--mantine-color-body); /* Couleur de fond par défaut Mantine */
+  color: var(--mantine-color-text);      /* Couleur du texte par défaut Mantine */
+}
+
+/*---------------------------------------------
+  Halo violet en haut de la page
+---------------------------------------------*/
+body::before {
+  z-index: 0; /* derrière le contenu */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 250px; /* hauteur du halo */
+  pointer-events: none; /* le halo ne bloque pas le clic sur le contenu */
+}
+
+/*---------------------------------------------
+  Liens
+---------------------------------------------*/
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
+/*---------------------------------------------
+  Header & Nav
+---------------------------------------------*/
 header {
   width: 100%;
   display: flex;
-  margin: 20px;
+  margin-top: 20px;
   border: 1px solid rgb(108, 104, 104);
   margin-bottom: 60px; /* pour sortir du halo */
   font-family: var(--font-space-grotesk);
-} 
+  /*efet glassmorphisme*/
+   background: rgba(20, 0, 20, 0.5); /* violet sombre semi-transparent */
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 0, 255, 0.25); /* léger contour magenta */
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+}
 
-nav{
+nav {
   display: flex;
   width: 100%;
-  position: relative; /* important pour que z-index marche */
-  z-index: 10;        /* passe au-dessus du halo */
-  
+  position: relative;
+  z-index: 10; /* passe au-dessus du halo */
 }
 
 ul {
@@ -120,32 +110,39 @@ ul {
   align-items: center;
   width: 100%;
   padding-right: 20px;
-  margin-right: 500px
 }
 
-li{
+li {
   list-style-type: none;
 }
 
-.name{
- 
-  color: #D451E0;
+/*---------------------------------------------
+  Classe name spécifique
+---------------------------------------------*/
+.name {
+  color: #D451E0; /* couleur violet */
   margin-right: 400px;
 }
 
-.bob{
-  margin: 20px;
+.fonctions-container {
+  margin-top: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-main{
+/*---------------------------------------------
+  Main content
+---------------------------------------------*/
+main {
   font-family: var(--font-space-grotesk);
   display: flex;
   justify-content: center;
   width: 100%;
-  border: 1px solid rgb(108, 104, 104);
 }
-.main-container{
 
+.main-container {
   width: 100%;
   display: flex;
   margin-top: 20px;
@@ -153,173 +150,87 @@ main{
   height: 400px;
   z-index: 10;
 }
-.main-title{
+
+.main-title {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
   text-align: center;
-  
 }
-.video-container{
+
+.video-container {
   width: 85%;
   height: 200px;
   border-radius: 25px;
 }
-/*Pour cacher la bar du lecteur video au depart*/
-media-control-bar {
-  opacity: 0;
-  transition: opacity 0.3s;
-}
 
-media-controller:hover media-control-bar {
-  opacity: 1;
-}
-
-h1{
+/*---------------------------------------------
+  Titres
+---------------------------------------------*/
+h1 {
   font-size: 60px;
+  margin: 10px;
   margin-bottom: 35px;
   z-index: 2;
-  margin: 10px;
   font-family: var(--font-space-grotesk);
 }
-.btn{
+
+/*---------------------------------------------
+  Boutons
+---------------------------------------------*/
+.btn {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  width: 200px;  
+  width: 200px;
   text-align: center;
   margin: 20px;
-  text-align: center;
-  padding: auto;
 }
-#btnInfo{
+
+#btnInfo {
   height: 30px;
   z-index: 10;
-  /* test effet glass*/
   background: rgba(133, 129, 129, 0.066);
   box-shadow: 0 4px 30px rgba(88, 88, 88, 0.002);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
-#btnForm{
+
+#btnForm {
+  
   height: 40px;
- /* background-color:#D451E0;*/
+  font-size: small;
   color: black;
   font-weight: bold;
-  margin: 50px;
+  margin: 40px;
   border: none;
-  /* test effet glass*/
   background: rgba(242, 65, 233, 0.705);
   box-shadow: 0 4px 30px rgba(176, 170, 170, 0.052);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(5px);
 }
-footer{
+
+/*---------------------------------------------
+  Footer
+---------------------------------------------*/
+footer {
   display: flex;
   width: 100%;
   justify-content: center;
 }
 
-footer a{
+footer a {
   margin: 35px;
 }
 
-/*les page dashboard, register et login*/
-/* Container centré pour login/register */
-.center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* toute la hauteur de la page */
-  background-color: #000000;
-}
-
-.form-box {
-  background-color: #000000;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 400px;
-  position: relative;
-  z-index: 2;
-}
-
-.form-box h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  z-index: 10;
-}
-
-.form-box input {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.form-box button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #7708d2;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.form-box button:hover {
-  background-color: #7708d2;
-}
-
-.form-box p {
-  margin-top: 1rem;
-  text-align: center;
-  color: #333;
-}
-
-/*Page upload*/
-.upload-container {
-  margin-top: 100px;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 200px;
-  margin-bottom: 250px;
-}
-
-/*page add product admin*/
-.add-product-section{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 210px;
-  z-index: 2;
-  position: relative; 
-}
-.add-product-form{
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding-top: 20px;
-  width: 300px;
-  height: 250px;
-  padding-top: 40px;
-  justify-content: space-around;
-  
-}
-
-/*Page boutique public*/
-.card-container{
+/*---------------------------------------------
+  Cartes
+---------------------------------------------*/
+.card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -328,6 +239,27 @@ footer a{
   margin-bottom: 100px;
   gap: 20px;
 }
-#card{
-  margin-bottom: 30px;
+
+/*---------------------------------------------
+  Dark mode
+---------------------------------------------*/
+:root[data-mantine-color-scheme="dark"] {
+  body {
+    background: #000000; /* vrai noir */
+    color: #ffffff;       /* texte blanc */
+  }
+
+  /* Halo violet réactivé en dark */
+  body::before {
+    background: radial-gradient(
+      ellipse at top,
+      rgba(180, 0, 255, 0.6) 0%,
+      transparent 70%
+    );
+  }
+
+  #btnForm {
+    color: #fff;
+    background: rgba(242, 65, 233, 0.8);
+  }
 }

@@ -18,16 +18,27 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
+    "@chakra-ui/icons": "^2.2.4",
+    "@chakra-ui/react": "^2.10.9",
+    "@chakra-ui/theme-tools": "^2.2.9",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mantine/dates": "^8.3.1",
     "@prisma/client": "^6.14.0",
     "@vercel/blob": "^1.1.1",
+    "aos": "^2.3.4",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.22",
     "media-chrome": "^4.13.1",
     "next": "15.4.6",
     "next-auth": "^5.0.0-beta.29",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-player": "^3.3.2"
+    "react-icons": "^5.5.0",
+    "react-player": "^3.3.2",
+    "sass": "^1.92.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -4,6 +4,7 @@ import Image from "next/image"
 import styles from "@/app/page.module.css"
 import ReactPlayer from "react-player"
 
+
 import {
     MediaController,
     MediaControlBar,
@@ -17,6 +18,7 @@ import {
     MediaMuteButton,
     MediaFullscreenButton,
 } from "media-chrome/react"
+
 
 export default function Acceuil() {
     return (
@@ -39,6 +41,7 @@ export default function Acceuil() {
 
                     <p>Transforme tes idées en contenu engageant en quelques minutes.</p>
                     <button className="btn" id="btnForm">Commencer gratuitement</button>
+
                     <div className="video-container">
                         <MediaController
                             style={{
@@ -77,6 +80,7 @@ export default function Acceuil() {
                 </div>
 
             </div>
+
         </div>
     )
 }

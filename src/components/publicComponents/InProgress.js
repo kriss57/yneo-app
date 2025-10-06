@@ -17,7 +17,7 @@ const InProgress = () => {
     return (
         <div
             style={{
-                width: "100%",
+                width: "40%",
                 height: "80px",
                 backgroundColor: "#000",
                 color: "#fff",

@@ -1,0 +1,26 @@
+// src/styles/_variables.scss
+
+$mantine-breakpoint-sm: 768px; // breakpoint mobile Mantine par défaut
+
+// Couleurs (tu peux ajuster selon ton thème Mantine)
+$mantine-color-black: #000;
+$mantine-color-white: #fff;
+$mantine-color-gray-0: #f8f9fa;
+$mantine-color-gray-1: #e9ecef;
+$mantine-color-gray-3: #dee2e6;
+$mantine-color-dark-4: #212529;
+$mantine-color-dark-5: #343a40;
+$mantine-color-dark-6: #495057;
+$mantine-color-dark-7: #6c757d;
+
+// Spacing
+$mantine-spacing-xs: 4px;
+$mantine-spacing-sm: 8px;
+$mantine-spacing-md: 16px;
+$mantine-spacing-xl: 32px;
+
+// Font size
+$mantine-font-size-sm: 14px;
+
+// Border radius
+$mantine-radius-md: 8px;
